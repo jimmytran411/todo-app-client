@@ -6,8 +6,8 @@ import { config } from "./config";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isUser, setIsUser] = useState("true");
 
-  let isUser, isLogin;
   const history = useHistory();
 
   const loginRequest = () => {
@@ -19,13 +19,11 @@ export const Login = () => {
       .then((res) => {
         let token = res.data.token;
         localStorage.setItem("token", token);
-        const localToken = localStorage.getItem("token");
-        console.log(localToken);
         history.push("/");
       })
       .catch((err) => {
         console.log(err);
-        isUser = false;
+        setIsUser(false);
       });
   };
 
