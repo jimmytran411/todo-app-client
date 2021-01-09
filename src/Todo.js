@@ -12,7 +12,7 @@ export const Todo = ({ id, title, description, isCompleted, completedAt }) => {
         readOnly
       />
       <label htmlFor={description}>{description}</label>
-      <span>{completedAt}</span>
+      {completedAt ? <p>Completed at: {completedAt}</p> : ""}
     </div>
   );
 };

@@ -1,32 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 
-export const TodoForm = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [isCompleted, setIsCompleted] = useState();
-  const [completedAt, setCompletedAt] = useState();
-
-  const todoSubmit = () => {
-    console.log("hello world");
-  };
-
-  const onCheck = () => {
-    if (isCompleted) {
-      setIsCompleted(false);
-      return true;
-    } else {
-      setIsCompleted(true);
-      return false;
-    }
-  };
-
+export const TodoForm = ({
+  submitTodo,
+  title,
+  description,
+  changeTitle,
+  changeDescription,
+  completed,
+  setCompleted,
+}) => {
   return (
     <div>
       <form
         className="todo-form"
         onSubmit={(e) => {
           e.preventDefault();
-          todoSubmit();
+          submitTodo();
         }}
       >
         <div className="form-input">
@@ -36,7 +25,7 @@ export const TodoForm = () => {
               id="title"
               value={title}
               placeholder="title"
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={changeTitle}
             ></input>
           </label>
         </div>
@@ -48,11 +37,18 @@ export const TodoForm = () => {
               type="description"
               value={description}
               placeholder="description"
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={changeDescription}
             ></input>
           </label>
         </div>
-        {/* <input type="checkbox" onChange={onCheck()} /> */}
+        <label htmlFor="completed">
+          Complete
+          <input
+            type="checkbox"
+            onChange={setCompleted}
+            defaultChecked={completed}
+          />
+        </label>
 
         <button className="login-btn">Save</button>
       </form>

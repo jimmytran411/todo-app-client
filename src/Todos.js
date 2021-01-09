@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getTodos } from "./resources";
@@ -27,14 +26,18 @@ export const Todos = () => {
           <h2>Loading ... </h2>
         ) : (
           todoList.map((data) => (
-            <Todo
-              key={data._id}
-              id={data._id}
-              title={data.title}
-              description={data.text}
-              isCompleted={data.completed}
-              completedAt={data.completedAt}
-            />
+            <div key={data._id}>
+              <Todo
+                id={data._id}
+                title={data.title}
+                description={data.text}
+                isCompleted={data.completed}
+                completedAt={data.completedAt}
+              />{" "}
+              <Link to={`/todo/${data._id}`}>
+                <button>Edit</button>
+              </Link>
+            </div>
           ))
         )}
       </div>

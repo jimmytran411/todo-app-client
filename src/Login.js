@@ -12,7 +12,7 @@ export const Login = () => {
 
   const loginRequest = () => {
     axios
-      .post(`${config.baseApi}/users/login`, {
+      .post(`${config.baseApi}/user/login`, {
         email,
         password,
       })
