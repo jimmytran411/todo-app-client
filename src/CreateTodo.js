@@ -10,7 +10,7 @@ export const CreateTodo = () => {
   const [completed, setCompleted] = useState(false);
   const history = useHistory();
 
-  const todoSubmit = () => {
+  const submitTodo = () => {
     axios
       .post(
         `${config.baseApi}/todo/new`,
@@ -31,7 +31,7 @@ export const CreateTodo = () => {
       changeTitle={(e) => setTitle(e.target.value)}
       description={description}
       changeDescription={(e) => setDescription(e.target.value)}
-      todoSubmit={todoSubmit}
+      submitTodo={submitTodo}
       setCompleted={() => {
         setCompleted(!completed);
       }}

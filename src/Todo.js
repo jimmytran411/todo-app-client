@@ -1,6 +1,13 @@
 import React from "react";
 
-export const Todo = ({ id, title, description, isCompleted, completedAt }) => {
+export const Todo = ({
+  id,
+  title,
+  description,
+  isCompleted,
+  completedAt,
+  onCompleteCheck,
+}) => {
   return (
     <div className="todo">
       <h1 className="todo-title">{title}</h1>
@@ -8,8 +15,8 @@ export const Todo = ({ id, title, description, isCompleted, completedAt }) => {
         type="checkbox"
         id={id}
         name={description}
-        checked={isCompleted}
-        readOnly
+        defaultChecked={isCompleted}
+        onChange={onCompleteCheck}
       />
       <label htmlFor={description}>{description}</label>
       {completedAt ? <p>Completed at: {completedAt}</p> : ""}
