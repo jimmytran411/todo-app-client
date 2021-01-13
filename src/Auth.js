@@ -7,22 +7,18 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        isLogin() ? <Component {...props} /> : <Redirect to="/signin" />
+        isLogin() ? <Component {...props} /> : <Redirect to="/user/login" />
       }
     />
   );
 };
 
-export const PublicRoute = ({ component: Component, restricted, ...rest }) => {
+export const PublicRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
       render={(props) =>
-        isLogin() && restricted ? (
-          <Redirect to="/dashboard" />
-        ) : (
-          <Component {...props} />
-        )
+        isLogin() ? <Redirect to="/" /> : <Component {...props} />
       }
     />
   );

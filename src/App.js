@@ -1,23 +1,44 @@
-import {
-  BrowserRouter as Router,
-  Link,
-  Switch,
-  useHistory,
-} from "react-router-dom";
-import React from "react";
+import { BrowserRouter as Router, Link, Switch } from "react-router-dom";
+import React, { useState } from "react";
 import "./App.css";
 import { Todos } from "./Todos";
 import { Login } from "./Login";
 import { CreateTodo } from "./CreateTodo";
 import { EditTodo } from "./EditTodo";
 import { PrivateRoute, PublicRoute } from "./Auth";
-import { logOut } from "./utils/auth";
+import { logOut, isLogin, getToken } from "./utils/auth";
+import { Register } from "./Register";
+import { config } from "./config";
+import axios from "axios";
 
 function App() {
-  let history = useHistory();
-  const onLogOutClick = () => {
+  const initialLoginState = isLogin();
+  const [isUser, setIsUser] = useState(initialLoginState);
+  const handleLogOut = () => {
     logOut();
-    history.push("/user/login");
+    setIsUser(!isUser);
+  };
+  const handleDeleteUser = () => {
+    let userId;
+    axios
+      .get(`${config.baseApi}/user/me`, {
+        headers: {
+          "x-auth": getToken(),
+        },
+      })
+      .then((res) => {
+        userId = res.data._id;
+        axios
+          .delete(`${config.baseApi}/user/${userId}`, {
+            headers: {
+              "x-auth": getToken(),
+            },
+          })
+          .then((res) => console.log(res))
+          .catch(console.error);
+        handleLogOut();
+      })
+      .catch(console.error);
   };
   return (
     <Router>
@@ -31,18 +52,23 @@ function App() {
               <Link to="/user/login">Login</Link>
             </li>
             <li>
-              <button onClick={onLogOutClick}>Log Out</button>
+              {" "}
+              <Link to="/user/register">Register</Link>
             </li>
+            {isUser ? (
+              <li>
+                <button onClick={handleLogOut}>Log Out</button>
+                <button onClick={handleDeleteUser}>Delete User</button>
+              </li>
+            ) : (
+              ""
+            )}
           </ul>
         </header>
         <Switch>
           <PrivateRoute exact path="/" component={Todos} />
-          <PublicRoute
-            exact
-            path="/user/login"
-            restricted={false}
-            component={Login}
-          />
+          <PublicRoute exact path="/user/login" component={Login} />
+          <PublicRoute exact path="/user/register" component={Register} />
           <PrivateRoute
             exact
             path="/todo/new"
