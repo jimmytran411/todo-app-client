@@ -27,9 +27,11 @@ export const Register = () => {
   };
 
   return (
-    <div>
+    <div className="auth-form">
       <h1>Register</h1>
-      <span>{!isValid ? "Something went wrong, please try again" : ""}</span>
+      <span id="error-message">
+        {!isValid ? "Something went wrong, please try again" : ""}
+      </span>
       <form
         className="login-form"
         onSubmit={(e) => {
@@ -38,27 +40,23 @@ export const Register = () => {
         }}
       >
         <div className="user-box">
-          <label htmlFor="email">
-            Email
-            <input
-              id="email"
-              value={email}
-              placeholder="email"
-              onChange={(e) => setEmail(e.target.value)}
-            ></input>
-          </label>
+          <h3>Email</h3>
+          <input
+            id="email"
+            value={email}
+            placeholder="email"
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
         </div>
         <div className="user-box">
-          <label htmlFor="password">
-            Password
-            <input
-              id="password"
-              type="password"
-              value={password}
-              placeholder="password"
-              onChange={(e) => setPassword(e.target.value)}
-            ></input>
-          </label>
+          <h3>Password</h3>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
         </div>
 
         <button className="login-btn">Register</button>

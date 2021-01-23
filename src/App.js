@@ -48,20 +48,26 @@ function App() {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <Link to="/user/login">Login</Link>
-            </li>
-            <li>
-              {" "}
-              <Link to="/user/register">Register</Link>
-            </li>
+
             {isUser ? (
-              <li>
-                <button onClick={handleLogOut}>Log Out</button>
-                <button onClick={handleDeleteUser}>Delete User</button>
-              </li>
+              <ul>
+                <li>
+                  <button onClick={handleDeleteUser}>Delete User</button>
+                </li>
+                <li>
+                  <button onClick={handleLogOut}>Log Out</button>
+                </li>
+              </ul>
             ) : (
-              ""
+              <ul>
+                <li>
+                  <Link to="/user/login">Login</Link>
+                </li>
+                <li>
+                  {" "}
+                  <Link to="/user/register">Register</Link>
+                </li>{" "}
+              </ul>
             )}
           </ul>
         </header>

@@ -9,8 +9,8 @@ export const Todo = ({
   onCompleteCheck,
 }) => {
   return (
-    <div className="todo">
-      <h1 className="todo-title">{title}</h1>
+    <div className="todo-content">
+      <h2 className="todo-title">{title}</h2>
       <input
         type="checkbox"
         id={id}

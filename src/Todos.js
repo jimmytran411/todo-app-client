@@ -75,7 +75,7 @@ export const Todos = () => {
           <h2>Loading ... </h2>
         ) : (
           todoList.map((data) => (
-            <div key={data._id}>
+            <div className="todo" key={data._id}>
               <Todo
                 id={data._id}
                 title={data.title}
@@ -84,12 +84,18 @@ export const Todos = () => {
                 completedAt={data.completedAt}
                 onCompleteCheck={onCompleteCheck}
               />{" "}
-              <Link to={`/todo/${data._id}`}>
-                <button>Edit</button>
-              </Link>
-              <button id={data._id} onClick={onDeleteClick}>
-                Delete
-              </button>
+              <div className="todo-btn">
+                <Link className="edit-btn" to={`/todo/${data._id}`}>
+                  <button>Edit</button>
+                </Link>
+                <button
+                  className="delete-btn"
+                  id={data._id}
+                  onClick={onDeleteClick}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))
         )}
